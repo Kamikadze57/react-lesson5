@@ -6,22 +6,25 @@ class Counter extends Component {
   //     this.result = data.number
   // }
   state = {
-    counter: 1,
+    counter: 0,
     result: 10,
   };
   addCount = () => {
     // this.state.counter += 1;
-    // return thix.state.counter;
+    // return this.state.counter;
     // Так не буде працювати (ванільний JS), в React використовують this.setState
-    this.setState({counter: 2})
+    this.setState((prevState) => ({ counter: prevState.counter + 1 }));
+  };
+  minusCount = () => {
+    this.setState((prevState) => ({ counter: prevState.counter -= 1 }));
   };
   // Методи
   render() {
     return (
       <>
-        <p>Counter: {this.state.counter}</p>
-        <button onClick={this.addCount}>Збільшити</button>
-        <button onClick={this.minusCount}>Зменшити</button>
+        <p className="counter__text">Counter: {this.state.counter}</p>
+        <button className="counter__btn" onClick={this.addCount}>Збільшити</button>
+        <button className="counter__btn" onClick={this.minusCount}>Зменшити</button>
       </>
     );
   }
